@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario random</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            text-align: center;
+        }
+    p{
+        font-family: cursive;
+    }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: #f4f4f4;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #resultado {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #resultado img,
+        #resultado audio {
+            max-width: 200px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Estoy aburrido xd</h1>
+
+    <form id="miFormulario">
+        <p>Pregunta 1: ¿Como me definirias?</p>
+        <select name="pregunta1" id="pregunta1">
+            <option value="rojo">Sapo</option>
+            <option value="azul">Hpta</option>
+            <option value="verde">Cachón</option>
+            <option value="teamobb">Te amo en secreto bb</option>
+        </select>
+
+        <p>Pregunta 2: ¿Quisieras salir al ?</p>
+        <input type="radio" name="pregunta2" value="cine"> Cine
+        <input type="radio" name="pregunta2" value="parque"> Parque
+
+        <p>Pregunta 3: ¿Que mascota tendrias conmigo?</p>
+        <input type="checkbox" name="pregunta3[]" value="perro"> Perro
+        <input type="checkbox" name="pregunta3[]" value="gato"> Gato
+        <input type="checkbox" name="pregunta3[]" value="conejo"> Conejo
+
+        <p>Pregunta 4: ¿Quieres ser mi novia?</p>
+        <input type="radio" name="pregunta4" value="dia"> Si
+        <input type="radio" name="pregunta4" value="noche"> No
+
+       
+
+        <br><br>
+
+        <button type="button" onclick="mostrarRespuestas()">Enviar respuestas</button>
+    </form>
+
+    <div id="resultado">
+        <h2>¡Gracias por responder!</h2>
+        <p>Te agradecemos por respondee estas preguntas y aqui esta un pequeño mensaje despues de pensar en tus respuestas <br>
+        te recordamos que este mensaje esta basado en la pregunta 4 </p>
+        <img id="resultadoImagen" alt="Imagen de agradecimiento">
+        <audio id="resultadoAudio" controls>
+            <source src="" type="audio/mp3">
+            Tu navegador no soporta el elemento de audio.
+        </audio>
+    </div>
+
+    <script>
+        function mostrarRespuestas() {
+            // Obtener las respuestas del formulario
+            var respuestas = {
+                pregunta1: document.getElementById('pregunta1').value,
+                pregunta2: document.querySelector('input[name="pregunta2"]:checked').value,
+                pregunta3: obtenerCheckboxValues('pregunta3[]'),
+                pregunta4: document.querySelector('input[name="pregunta4"]:checked').value,
+              
+            };
+
+            // Mostrar el resultado
+            var resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.style.display = 'block';
+
+            // Personalizar el mensaje, la imagen y el audio según las respuestas
+            var resultadoImagen = document.getElementById('resultadoImagen');
+            var resultadoAudio = document.getElementById('resultadoAudio');
+
+            if (respuestas.pregunta4 === 'dia') {
+                resultadoImagen.src = 'imagen/mora1.jpeg';
+                resultadoAudio.src = 'audio/mora2.ogg';
+            } else if (respuestas.pregunta4 === 'noche') {
+                resultadoImagen.src = 'imagen/negra1.jpeg';
+                resultadoAudio.src = 'audio/negra.ogg';
+            }
+
+            // Puedes utilizar las respuestas para personalizar el mensaje y otros elementos.
+        }
+
+        function obtenerCheckboxValues(checkboxName) {
+            var checkboxes = document.getElementsByName(checkboxName);
+            var values = [];
+            for (var i = 0; i < checkboxes.length; i++) {
+                if (checkboxes[i].checked) {
+                    values.push(checkboxes[i].value);
+                }
+            }
+            return values;
+        }
+    </script>
+
+</body>
+</html>
